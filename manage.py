@@ -3,8 +3,10 @@
 from flask import Flask,session
 from flask_script import Manager
 from flask_migrate import Migrate,MigrateCommand
-from iHome import app, db
+# from iHome import app, db
+from iHome import get_app, db
 
+app = get_app('dev')
 
 #Flask_script集成
 manager = Manager(app)
@@ -15,10 +17,10 @@ Migrate(app, db)
 manager.add_command('db', MigrateCommand)
 
 
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     # 设置session
-    session['name'] = 'ojl'
+    # session['name'] = 'ojl'
 
     return 'index'
 
